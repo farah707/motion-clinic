@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import app from './app.js';
+import ragAssistant from './utils/ragModel.js';
 
 config(); // Load environment variables
 
@@ -9,8 +10,14 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://farahtarek707:Ihf29082
 console.log('MongoDB URI:', MONGO_URI);
 
 // Error handling for the server
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, async () => {
   console.log(`Server listening at port ${PORT}`);
+  
+  // Pre-load the RAG model in the background
+  console.log('Pre-loading RAG model...');
+  ragAssistant.preloadModel().catch(error => {
+    console.error('Failed to pre-load RAG model:', error);
+  });
 }).on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
     console.error(`Port ${PORT} is already in use. Please try a different port or kill the process using this port.`);

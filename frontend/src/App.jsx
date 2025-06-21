@@ -31,6 +31,7 @@ import DeleteAccount from "./Pages/Delete_account/Delete_account";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AIChat from "./Pages/AIChat/AIChat";
 
 // Use environment variable for API base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
@@ -143,6 +144,7 @@ const App = () => {
             <Route path="/physical-therapy" element={<PhysicalTherapy />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/ai-chat" element={<AIChat />} />
             <Route path="/signup" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

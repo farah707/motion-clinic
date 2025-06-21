@@ -90,6 +90,7 @@ const Navbar = () => {
           <Link to="/">{t("home")}</Link>
           <Link to="/appointment">{t("appointment")}</Link>
           <Link to="/departments">{t("departments")}</Link>
+          <Link to="/ai-chat">AI Assistant</Link>
           <Link to="/contact">{t("contact")}</Link>
           <Link to="/about">{t("about")}</Link>
         </div>
@@ -105,6 +106,7 @@ const Navbar = () => {
               <div className={`dropdown-menu ${menuVisible ? "show" : ""}`}>
                 <Link to="/profile">{t("profile")}</Link>
                 <Link to="/settings">{t("settings")}</Link>
+                <Link to="/ai-chat">AI Assistant</Link>
                 {user?.role === "Admin" && (
                   <Link to="/admin/dashboard">{t("adminDashboard")}</Link>
                 )}
@@ -135,12 +137,14 @@ const Navbar = () => {
           <Link to="/" onClick={toggleSideMenu}>{t("home")}</Link>
           <Link to="/appointment" onClick={toggleSideMenu}>{t("appointment")}</Link>
           <Link to="/departments" onClick={toggleSideMenu}>{t("departments")}</Link>
+          <Link to="/ai-chat" onClick={toggleSideMenu}>AI Assistant</Link>
           <Link to="/contact" onClick={toggleSideMenu}>{t("contact")}</Link>
           <Link to="/about" onClick={toggleSideMenu}>{t("about")}</Link>
           {isAuthenticated ? (
             <>
               <Link to="/profile" onClick={toggleSideMenu}>{t("profile")}</Link>
               <Link to="/settings" onClick={toggleSideMenu}>{t("settings")}</Link>
+              <Link to="/ai-chat" onClick={toggleSideMenu}>AI Assistant</Link>
               {user?.role === "Admin" && (
                 <Link to="/admin/dashboard" onClick={toggleSideMenu}>{t("adminDashboard")}</Link>
               )}

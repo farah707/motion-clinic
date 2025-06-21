@@ -15,6 +15,7 @@ import appointmentRouter from "./router/appointmentRouter.js";
 import messageRouter from "./router/messageRouter.js";
 import notificationRouter from "./router/notificationRouter.js";
 import userRouter from "./router/userRouter.js";
+import aiRouter from "./router/aiRouter.js";
 
 
 const app = express();
@@ -61,6 +62,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/appointment", appointmentRouter);
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/notifications", notificationRouter);
+app.use("/api/ai", aiRouter);
 
 
 // Error handler

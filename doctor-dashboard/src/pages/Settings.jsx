@@ -32,7 +32,7 @@ const Settings = () => {
         email: doctor.email || "",
         phone: doctor.phone || "",
         doctorDepartment: doctor.doctorDepartment || ""
-      });
+  });
     }
   }, [doctor]);
 

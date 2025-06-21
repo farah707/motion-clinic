@@ -1,0 +1,6 @@
+{
+  "embedding_model": "all-MiniLM-L6-v2",
+  "generator_model": "microsoft/BioGPT",
+  "num_cases": 7004,
+  "embedding_dim": 384
+}
