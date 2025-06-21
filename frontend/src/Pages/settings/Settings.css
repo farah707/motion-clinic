@@ -1,0 +1,1111 @@
+/* Settings.css */
+/* Move Settings Box Down */
+.settings-container {
+  max-width: 900px;
+  margin: 150px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+/* Ensure Footer Stays at the Bottom */
+.footer {
+  position: fixed;
+  bottom: -5;
+  width: 100%;
+  background-color: #06005c; /* Adjust color as needed */
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.dark-mode .settings-container {
+  background-color: #252836;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.settings-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #06005c;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.settings-container h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+  border-radius: 2px;
+}
+
+.setting-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.dark-mode .setting-option {
+  border-bottom-color: #3d4361;
+}
+
+.setting-option label {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.dark-mode .setting-option label {
+  color: #e6f0ff;
+}
+
+.setting-option select {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  font-size: 1rem;
+}
+
+.dark-mode .setting-option select {
+  background-color: #1e2235;
+  border-color: #3d4361;
+  color: #e6f0ff;
+}
+
+.setting-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.setting-option select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.settings-container h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  color: #06005c;
+}
+
+.dark-mode .settings-container h1 {
+  border-bottom: 1px solid #3d4361;
+  color: #4d97ff;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.dark-mode .setting-item {
+  border-bottom: 1px solid #3d4361;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item span {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.toggle-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f1f5ff;
+  color: #000638;
+  transition: all 0.2s ease;
+}
+
+.dark-mode .toggle-btn {
+  background-color: #1d34ff;
+  color: #e6f0ff;
+}
+
+.toggle-btn:hover {
+  background-color: #4d97ff;
+  color: #e6f0ff;
+}
+
+.dark-mode .toggle-btn:hover {
+  background-color: #4d97ff;
+}
+
+/* Global Dark Mode Styles */
+.dark-mode {
+  background-color: #1e2235;
+  color: #e6f0ff;
+}
+
+/* About Section Dark Mode */
+.dark-mode .about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  flex-wrap: wrap;
+  background-color: #1e2235;
+}
+
+.dark-mode .about-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #4d97ff;
+}
+
+.dark-mode .about-content p {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #e6f0ff;
+}
+
+/* Vision Section Dark Mode */
+.dark-mode .vision-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  flex-wrap: wrap;
+  background-color: #1e2235;
+}
+
+.dark-mode .vision-section h2,
+.dark-mode .vision-section h3 {
+  color: #4d97ff;
+}
+
+.dark-mode .vision-section p {
+  color: #e6f0ff;
+}
+
+.dark-mode .vision-content {
+  max-width: 700px;
+  text-align: left;
+  background-color: #1e2235;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Mission Section Dark Mode */
+.dark-mode .mission-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
+  text-align: center;
+  flex-wrap: wrap;
+  background-color: #1e2235;
+}
+
+.dark-mode .mission-section h2,
+.dark-mode .mission-section h3 {
+  color: #4d97ff;
+}
+
+.dark-mode .mission-section p {
+  color: #e6f0ff;
+}
+
+/* Home Component Dark Mode */
+.dark-mode .home {
+  color: #e6f0ff;
+  background-color: #1e2235;
+}
+
+.dark-mode .overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode .call-now-btn {
+  background-color: #1d34ff;
+  color: #e6f0ff;
+}
+
+.dark-mode .call-now-btn:hover {
+  background-color: #4d97ff;
+}
+
+/* Cards Dark Mode */
+.dark-mode .home-cards-container {
+  background-color: #1e2235;
+}
+
+.dark-mode .home-card {
+  background-color: #1e2235;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .home-card:hover {
+  background-color: #252836;
+}
+
+.dark-mode .home-card button {
+  background-color: #1d34ff;
+  color: #e6f0ff;
+}
+
+.dark-mode .home-card button:hover {
+  background-color: #4d97ff;
+}
+
+/* Department Container Dark Mode */
+.dark-mode .departments-container {
+  background-color: #1e2235;
+}
+
+.dark-mode.departments {
+  padding-top: 30px;
+  padding-bottom: 50px;
+  position: center;
+  background-color: #1e2235;
+}
+
+.dark-mode .departments h1 {
+  font-size: 40px;
+  margin-bottom: 100px;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 10px;
+  color: #4d97ff;
+}
+
+/* Message Form Dark Mode */
+.dark-mode .contact-us h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #06005c;
+}
+.dark-mode .contact-us p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  color: #e6f0ff;
+}
+.dark-mode .form-component {
+  background-color: #1e2235;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .form-component h2 {
+  color: #4d97ff;
+}
+
+.dark-mode .form-component form input,
+.dark-mode .form-component form select,
+.dark-mode .form-component form textarea {
+  background-color: #1e2235;
+  border: 1px solid #3d4361;
+  color: #e6f0ff;
+}
+
+.dark-mode .form-component form button,
+.dark-mode .get-appointment-btn,
+.dark-mode .cancel-btn {
+  background-color: #1d34ff;
+  color: #e6f0ff;
+}
+
+.dark-mode .form-component form button:hover,
+.dark-mode .get-appointment-btn:hover,
+.dark-mode .cancel-btn:hover {
+  background-color: #4d97ff;
+}
+
+/* Profile Dark Mode */
+.dark-mode .profile-container {
+  background-color: #1e2235;
+  color: #e6f0ff;
+}
+
+.dark-mode .banner {
+  background-color: #1e2235;
+  color: #e6f0ff;
+}
+
+.dark-mode .banner-title {
+  color: #e6f0ff;
+}
+
+.dark-mode .banner-subtitle {
+  color: #e6f0ff;
+}
+
+.dark-mode .user-name {
+  color: #4d97ff;
+}
+
+.dark-mode .info-box {
+  background-color: #1d34ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .profile-details {
+  background-color: #1e2235;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .profile-header {
+  color: #4d97ff;
+}
+
+.dark-mode .profile-box {
+  background-color: #1e2235;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .profile-box h3 {
+  color: #4d97ff;
+}
+
+.dark-mode .profile-box p {
+  color: #e6f0ff;
+}
+
+.dark-mode .profile-box strong {
+  color: #4d97ff;
+}
+
+.dark-mode .input-field,
+.dark-mode .input-textarea,
+.dark-mode select {
+  background-color: #1e2235;
+  border: 1px solid #3d4361;
+  color: #e6f0ff;
+}
+
+.dark-mode .btn-edit,
+.dark-mode .btn-save,
+.dark-mode .btn-send {
+  background-color: #1d34ff;
+  color: #e6f0ff;
+}
+
+.dark-mode .btn-edit:hover,
+.dark-mode .btn-save:hover,
+.dark-mode .btn-send:hover {
+  background-color: #4d97ff;
+}
+
+.dark-mode .btn-cancel {
+  background-color: #d03b3b;
+}
+
+.dark-mode .btn-cancel:hover {
+  background-color: #e74c3c;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-container {
+    margin: 100px 10px 20px 10px;
+    padding: 20px;
+  }
+  
+  .setting-option {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .setting-option select {
+    width: 100%;
+  }
+  
+  .notification-time-inputs {
+    width: 100%;
+  }
+}
+/* Add these to your existing Settings.css */
+[dir="rtl"] .settings-container {
+  text-align: right;
+}
+
+[dir="rtl"] .setting-option {
+  flex-direction: row-reverse;
+}
+
+/* Adjust any other directional styles */
+[dir="rtl"] .setting-option label {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+.delete-account-btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  min-width: 200px;
+  margin-left: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .delete-account-btn {
+  background-color: #e57373;
+}
+
+.delete-account-btn:hover {
+  background-color: #c82333;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+}
+
+.dark-mode .delete-account-btn:hover {
+  background-color: #ef9a9a;
+}
+
+/* New styles for notification time inputs */
+.notification-time-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.notification-time-inputs input {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.notification-time-inputs span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.dark-mode .notification-time-inputs input {
+  background-color: #1e2235;
+  border-color: #3d4361;
+  color: #e6f0ff;
+}
+
+.dark-mode .notification-time-inputs span {
+  color: #a0aec0;
+}
+
+/* Save Notification Button */
+.save-notification-btn {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  margin: 10px 0 20px 0;
+  width: auto;
+  min-width: 200px;
+  align-self: flex-start;
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .save-notification-btn {
+  background-color: #b39ddb;
+}
+
+.save-notification-btn:hover {
+  background-color: #5e35b1;
+  box-shadow: 0 4px 10px rgba(103, 58, 183, 0.2);
+}
+
+.dark-mode .save-notification-btn:hover {
+  background-color: #9c88cc;
+}
+
+.save-notification-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.dark-mode .save-notification-btn:disabled {
+  background-color: #555;
+}
+
+/* Notification Modal */
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.notification-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.dark-mode .notification-content {
+  background-color: #252836;
+  color: #e6f0ff;
+}
+
+.notification-content p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.dark-mode .notification-content p {
+  color: #e6f0ff;
+}
+
+.notification-content button {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .notification-content button {
+  background-color: #b39ddb;
+}
+
+.notification-content button:hover {
+  background-color: #5e35b1;
+}
+
+.dark-mode .notification-content button:hover {
+  background-color: #9c88cc;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.dark-mode .toggle-slider {
+  background-color: #555;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.dark-mode .toggle-slider:before {
+  background-color: #ccc;
+}
+
+input:checked + .toggle-slider {
+  background-color: #4CAF50;
+}
+
+.dark-mode input:checked + .toggle-slider {
+  background-color: #64b5f6;
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #4CAF50;
+}
+
+.dark-mode input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #64b5f6;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.toggle-slider.round {
+  border-radius: 34px;
+}
+
+.toggle-slider.round:before {
+  border-radius: 50%;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+}
+
+.dark-mode .settings-header {
+  border-bottom-color: #3d4361;
+}
+
+.tab-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  margin-right: 15px;
+  user-select: none;
+}
+
+.dark-mode .tab-item {
+  color: #a0aec0;
+}
+
+.tab-item:hover {
+  color: #673ab7;
+}
+
+.dark-mode .tab-item:hover {
+  color: #8c73c8;
+}
+
+.tab-item.active {
+  color: #673ab7;
+  border-bottom-color: #673ab7;
+  font-weight: 600;
+}
+
+.dark-mode .tab-item.active {
+  color: #b39ddb;
+  border-bottom-color: #b39ddb;
+}
+
+.settings-content {
+  padding: 20px 0;
+}
+
+.account-settings-section h3,
+.login-security-section h3,
+.notification-settings-section h3,
+.interface-settings-section h3,
+.additional-settings-section h3 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.dark-mode .account-settings-section h3,
+.dark-mode .login-security-section h3,
+.dark-mode .notification-settings-section h3,
+.dark-mode .interface-settings-section h3,
+.dark-mode .additional-settings-section h3 {
+  color: #e6f0ff;
+  border-bottom-color: #3d4361;
+}
+
+.profile-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.form-group-settings {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.form-group-settings label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.dark-mode .form-group-settings label {
+  color: #a0aec0;
+}
+
+.form-group-settings input,
+.form-group-settings textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.dark-mode .form-group-settings input,
+.dark-mode .form-group-settings textarea {
+  background-color: #1e2235;
+  border-color: #3d4361;
+  color: #e6f0ff;
+}
+
+.form-group-settings input:focus,
+.form-group-settings textarea:focus {
+  outline: none;
+  border-color: #673ab7;
+  box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.2);
+}
+
+.dark-mode .form-group-settings input:focus,
+.dark-mode .form-group-settings textarea:focus {
+  border-color: #b39ddb;
+  box-shadow: 0 0 0 3px rgba(179, 157, 219, 0.2);
+}
+
+.form-group-settings input:disabled {
+  background-color: #f8f8f8;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.dark-mode .form-group-settings input:disabled {
+  background-color: #303340;
+  color: #777;
+}
+
+.form-group-settings.full-width {
+  grid-column: 1 / -1;
+}
+
+.verified-status {
+  display: inline-block;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  align-self: flex-start;
+}
+
+.dark-mode .verified-status {
+  background-color: #4caf50;
+  color: #e8f5e9;
+}
+
+.update-profile-btn {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: fit-content;
+  margin-top: 20px;
+}
+
+.dark-mode .update-profile-btn {
+  background-color: #b39ddb;
+}
+
+.update-profile-btn:hover {
+  background-color: #5e35b1;
+  box-shadow: 0 4px 15px rgba(103, 58, 183, 0.3);
+}
+
+.dark-mode .update-profile-btn:hover {
+  background-color: #9c88cc;
+  box-shadow: 0 4px 15px rgba(179, 157, 219, 0.3);
+}
+
+.update-profile-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.dark-mode .update-profile-btn:disabled {
+  background-color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-header {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tab-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .profile-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group-settings input,
+  .form-group-settings textarea {
+    font-size: 0.9rem;
+  }
+}
+
+.setting-option:nth-child(2) {
+  margin-bottom: 10px;
+}
+
+.setting-option:nth-child(3) {
+  margin-bottom: 10px;
+}
+
+/* Login & Security Actions */
+.login-security-actions {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 15px; /* Space between buttons */
+  margin-top: 20px; /* Space from heading */
+  align-items: flex-start; /* Align buttons to the left */
+}
+
+/* Forgot Password Button */
+.forgot-password-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  margin: 0; /* Reset margin from previous styles */
+  width: fit-content;
+  background-color: #673ab7; /* Professional purple */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .forgot-password-btn {
+  background-color: #b39ddb;
+}
+
+.forgot-password-btn:hover {
+  background-color: #5e35b1;
+  box-shadow: 0 4px 10px rgba(103, 58, 183, 0.2);
+}
+
+.dark-mode .forgot-password-btn:hover {
+  background-color: #9c88cc;
+}
+
+.forgot-password-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.dark-mode .forgot-password-btn:disabled {
+  background-color: #555;
+}
+
+/* Delete account button */
+.delete-account-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  margin: 0; /* Reset margin from previous styles */
+  width: fit-content;
+  background-color: #dc3545; /* Professional red */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .delete-account-btn {
+  background-color: #e57373;
+}
+
+.delete-account-btn:hover {
+  background-color: #c82333;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+}
+
+.dark-mode .delete-account-btn:hover {
+  background-color: #ef9a9a;
+}
+
+.delete-account-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.dark-mode .delete-account-btn:disabled {
+  background-color: #555;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+  .settings-container {
+    padding: 15px;
+    margin: 80px 10px 20px 10px; /* Adjust top margin for smaller navbar */
+  }
+
+  .settings-header {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 5px;
+  }
+
+  .tab-item {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    margin-right: 8px;
+    margin-bottom: 5px;
+  }
+
+  .account-settings-section h3,
+  .login-security-section h3,
+  .notification-settings-section h3,
+  .interface-settings-section h3 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .profile-fields {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .form-group-settings label {
+    font-size: 0.85rem;
+  }
+
+  .form-group-settings input,
+  .form-group-settings textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .update-profile-btn,
+  .save-notification-btn,
+  .forgot-password-btn,
+  .delete-account-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    width: 100%; /* Make buttons full width */
+    min-width: unset; /* Remove min-width */
+  }
+
+  .login-security-actions {
+    gap: 10px;
+  }
+
+  .notification-time-inputs {
+    flex-wrap: wrap; /* Allow time inputs to wrap */
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .notification-time-inputs input {
+    width: 60px;
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .notification-time-inputs span {
+    font-size: 0.8rem;
+  }
+
+  .setting-option label {
+    font-size: 1rem;
+  }
+
+  .setting-option select {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+
+  .toggle-switch {
+    width: 50px;
+    height: 28px;
+  }
+
+  .toggle-slider:before {
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+  }
+
+  input:checked + .toggle-slider:before {
+    transform: translateX(22px);
+  }
+}

@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #e5e5e5;
+}
+
+.btn {
+  padding: 6px 18px; /* Slightly smaller padding */
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.white-btn {
+  background: #fff;
+  color: #111;
+}
+
+p,
+span,
+a {
+  font-size: 18px; /* Reduced font size */
+}
+
+@media (max-width: 480px) {
+  p,
+  span,
+  a {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5,
+  h6 {
+    font-size: 16px;
+  }
+}
+
+h1 {
+  font-size: 32px; /* Slightly smaller heading */
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 28px; /* Reduced font size */
+  font-weight: 900;
+}
+
+h3 {
+  font-size: 24px; /* Slightly smaller size */
+  font-weight: 900;
+}
+
+h4 {
+  font-size: 20px; /* Slightly smaller size */
+  font-weight: 900;
+}
+
+h5,
+h6 {
+  font-size: 22px; /* Slightly smaller size */
+  font-weight: 700;
+}
+
+@media (max-width: 1186px) {
+  h1 {
+    font-size: 30px;
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: 26px;
+    font-weight: 900;
+  }
+}
+
+.container {
+  padding: 0 80px; /* Slightly reduced padding */
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 0 15px; /* Smaller padding for smaller screens */
+  }
+}
+
+/* Biography Section */
+.biography {
+  display: flex;
+  gap: 40px; /* Reduced gap */
+  padding: 50px 15px; /* Reduced padding */
+  background-color: #f8f8f8;
+  flex-wrap: wrap;
+}
+
+.biography .banner img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.biography .banner h3 {
+  font-size: 1.8rem; /* Slightly smaller heading */
+  color: #333;
+  font-weight: bold;
+}
+
+.biography .banner p {
+  color: #555;
+  line-height: 1.6;
+}
+
+@media (max-width: 925px) {
+  .biography {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .biography .banner {
+    width: 100%;
+  }
+
+  .biography .banner h3,
+  .biography .banner p {
+    text-align: center;
+  }
+}
+

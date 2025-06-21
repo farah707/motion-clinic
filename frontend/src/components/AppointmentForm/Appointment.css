@@ -1,0 +1,440 @@
+/* Appointment Form Styles */
+.appointment-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(96, 180, 255, 0.1),
+              0 0 100px rgba(96, 180, 255, 0.1);
+  border: 1px solid rgba(96, 180, 255, 0.1);
+  animation: glow 3s infinite;
+}
+
+.form-component h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #2f8bff, #60b4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+  position: relative;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  color: #1a365d;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.form-component form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.form-component form input,
+.form-component form select,
+.form-component form textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: #f8faff;
+  border: 1.5px solid #e1e8ff;
+  border-radius: 12px;
+  color: #1a365d;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-component form input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-component form input:focus,
+.form-component form select:focus,
+.form-component form textarea:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #60b4ff;
+  box-shadow: 0 0 0 4px rgba(96, 180, 255, 0.1);
+}
+
+.form-component form input.error,
+.form-component form select.error,
+.form-component form textarea.error {
+  border-color: #ff4d4f;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.form-component form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+/* Select Styling */
+.form-component form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b9bb4' viewBox='0 0 16 16'%3E%3Cpath d='M8 10.5l4-4H4l4 4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* Checkbox styles */
+.checkbox-container {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #1a365d;
+  font-size: 1rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+/* Button container styles */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Button styles */
+.get-appointment-btn,
+.cancel-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.get-appointment-btn {
+  background: linear-gradient(135deg, #60b4ff 0%, #2f8bff 100%);
+  color: white;
+}
+
+.get-appointment-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(96, 180, 255, 0.3);
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #1a365d;
+  border: 1px solid #e1e8ff;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background-color: #e5e5e5;
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Confirmation popup styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(96, 180, 255, 0.15);
+  z-index: 1001;
+  width: 90%;
+  max-width: 500px;
+}
+
+.confirmation-popup h3 {
+  color: #1a365d;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.confirmation-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.confirmation-popup li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e1e8ff;
+  color: #1a365d;
+}
+
+.confirmation-popup li:last-child {
+  border-bottom: none;
+}
+
+.confirm-yes,
+.confirm-no {
+  padding: 0.875rem 1.5rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.confirm-yes {
+  background: linear-gradient(135deg, #60b4ff 0%, #2f8bff 100%);
+  color: white;
+  border: none;
+}
+
+.confirm-yes:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(96, 180, 255, 0.3);
+}
+
+.confirm-no {
+  background-color: white;
+  color: #1a365d;
+  border: 1px solid #e1e8ff;
+}
+
+.confirm-no:hover:not(:disabled) {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+}
+
+/* Animation */
+@keyframes glow {
+  0% {
+    box-shadow: 0 10px 40px rgba(96, 180, 255, 0.1),
+                0 0 100px rgba(96, 180, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(96, 180, 255, 0.15),
+                0 0 100px rgba(96, 180, 255, 0.15);
+  }
+  100% {
+    box-shadow: 0 10px 40px rgba(96, 180, 255, 0.1),
+                0 0 100px rgba(96, 180, 255, 0.1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .appointment-form {
+    padding: 2rem;
+  }
+
+  .form-component h2 {
+    font-size: 2.2rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .get-appointment-btn,
+  .cancel-btn {
+    width: 100%;
+    padding: 0.8rem 2rem;
+  }
+
+  .confirmation-popup {
+    padding: 1.5rem;
+  }
+
+  .confirmation-popup h3 {
+    font-size: 1.3rem;
+  }
+
+  .confirmation-popup p,
+  .confirmation-popup li {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointment-form {
+    padding: 1.5rem;
+  }
+
+  .form-component h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-component form input,
+  .form-component form select,
+  .form-component form textarea {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .button-container {
+    gap: 0.6rem;
+  }
+
+  .get-appointment-btn,
+  .cancel-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .confirmation-popup {
+    padding: 1rem;
+  }
+
+  .confirmation-popup h3 {
+    font-size: 1.1rem;
+  }
+
+  .confirmation-popup p,
+  .confirmation-popup li {
+    font-size: 0.85rem;
+  }
+
+  .confirm-yes,
+  .confirm-no {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmation-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.confirmation-content h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.confirmation-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.confirmation-content li {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.confirmation-content li:last-child {
+  border-bottom: none;
+}
+
+.confirmation-content strong {
+  color: #34495e;
+  margin-right: 0.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.modal-actions button:first-child {
+  background-color: #3498db;
+  color: white;
+}
+
+.modal-actions button:first-child:hover {
+  background-color: #2980b9;
+}
+
+.modal-actions button:last-child {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal-actions button:last-child:hover {
+  background-color: #c0392b;
+}
+
+.modal-actions button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}

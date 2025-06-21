@@ -1,0 +1,109 @@
+/* Page Layout */
+.orthopedics-page {
+  background-color: #f6fbf7; /* Light green background */
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  margin-top: 80px; /* Adjust for navbar height */
+}
+
+.orthopedics-layout {
+  display: flex;
+  gap: 20px; /* Space between sidebar and content */
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 20%; /* Sidebar width */
+  background-color: #eaf4ec; /* Light green background */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+}
+
+.sidebar li {
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  color:  #020a70;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar li:hover {
+  background-color: #d4e9d3;
+}
+
+/* Content Section */
+.content {
+  width: 75%; /* Adjust content width to accommodate sidebar */
+}
+
+/* Header Section */
+.orthopedics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eaf4ec;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.orthopedics-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #020a70;
+}
+
+.orthopedics-image {
+  width: 40%;
+  border-radius: 8px;
+}
+
+/* Appointment Button */
+.appointment-btn {
+  background-color: #1a7dda;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.appointment-btn:hover {
+  background-color: #4d97ff;
+}
+
+/* Details Section */
+.orthopedics-details {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #555;
+  line-height: 1.6;
+}
+
+.orthopedics-details h3 {
+  font-size: 1.5rem;
+  color: #000989;
+}
+
+.orthopedics-details ul {
+  padding-left: 20px;
+}
+
+.orthopedics-details li {
+  margin-bottom: 10px;
+}
