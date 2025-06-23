@@ -1,0 +1,443 @@
+/* Transparent Navbar (Home Page) */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 80px; 
+}
+
+.navbar.transparent {
+  background: transparent; /* Transparent background */
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  color: white; /* White text for Home page */
+}
+
+/* White Navbar with Dark Blue Links (All Pages except Home) */
+.navbar.blue {
+  background: white; /* White background */
+  color: #003366; /* Dark blue text color */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+/* Common Navbar Styles */
+/* Navbar.css */
+nav .logo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align logo to the left */
+  padding: 5px;
+}
+
+/* Navbar.css */
+.logo-img {
+  height: 80px; /* Adjusted default height */
+  width: auto;  /* Allow width to adjust proportionally */
+  max-height: 100%; /* Ensure the logo doesn't overflow vertically within the navbar */
+  max-width: 150px; /* Limit max width for very large screens */
+  object-fit: contain;
+}
+
+/* Navigation Links Centered */
+nav .navLinks {
+  flex: 2; /* Center section */
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  min-width: 500px; /* Ensure links have enough space on wide screens */
+}
+
+nav .navLinks .links a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px; /* Adjusted default font size for better scaling */
+  padding: 5px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Hover color for links */
+nav .navLinks .links a:hover {
+  color: yellow; /* Change to yellow on hover */
+}
+
+/* Auth Buttons on the Right */
+.authButtons {
+  flex: 1; /* Right section */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px; /* Ensure buttons have enough space */
+}
+
+.authButtons .btn {
+  color:#06005c;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.authButtons .btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 1100px) {
+  .authButtons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* The .navLinks display: none; is already handled globally for mobile, 
+     and the .navLinks.showmenu is replaced by .side-menu */
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+  }
+
+  .logo-img {
+    height: 60px;
+    width: auto;
+    max-width: 120px;
+  }
+
+  /* Hide regular navigation on mobile */
+  .navLinks {
+    display: none !important;
+  }
+
+  /* Hide auth buttons on mobile */
+  .authButtons {
+    display: none !important;
+  }
+
+  /* Mobile Hamburger Icon */
+  .mobile-menu-icon {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    z-index: 11;
+    position: fixed;
+    left: 20px;
+    top: 20px;
+  }
+
+  /* Side Menu Styles */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Changed from right to left */
+    width: 300px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out; /* Changed from right to left */
+    z-index: 1001;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .side-menu.open {
+    left: 0; /* Changed from right to left */
+  }
+
+  .side-menu-links {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .side-menu-links a, 
+  .side-menu-links button {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .side-menu-links a:hover, 
+  .side-menu-links button:hover {
+    color: var(--primary-color);
+  }
+
+  .side-menu .logoutBtn, 
+  .side-menu .loginBtn, 
+  .side-menu .signupBtn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .side-menu .loginBtn, 
+  .side-menu .signupBtn {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .side-menu .logoutBtn {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  /* Overlay for when side menu is open */
+  .side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 10px;
+    height: 60px;
+  }
+
+  .logo-img {
+    height: 80px;
+    width: 80px;
+  }
+
+  .authButtons {
+    gap: 5px;
+  }
+
+  .authButtons .btn {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  .navLinks.showmenu {
+    top: 50px;
+    padding: 10px;
+  }
+
+  .navLinks .links a {
+    font-size: 16px;
+    padding: 6px 0;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.dropdown-menu.show {
+  display: flex;
+}
+
+.dropdown-menu a, .dropdown-menu button {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdown-menu a:hover, .dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hide desktop nav links on mobile */
+.navLinks {
+  display: none; 
+}
+
+/* Mobile Hamburger Icon */
+.mobile-menu-icon {
+  display: block; /* Show on mobile */
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--primary-color);
+  z-index: 11; /* Ensure it's above other content */
+}
+
+/* Side Menu Styles */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Hidden off-screen */
+  width: 300px; /* Adjust as needed */
+  height: 100vh;
+  background-color: var(--navbar-background-color); /* Use a suitable background color */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out; /* Smooth transition */
+  z-index: 1000; /* Ensure it's on top of everything */
+  padding-top: 60px; /* Space for fixed header/logo */
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu.open {
+  right: 0; /* Slide in */
+}
+
+.side-menu-links {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 15px; /* Spacing between links */
+}
+
+.side-menu-links a, .side-menu-links button {
+  color: var(--text-color-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 10px 0;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.side-menu-links a:hover, .side-menu-links button:hover {
+  color: var(--primary-color);
+}
+
+.side-menu .logoutBtn, .side-menu .loginBtn, .side-menu .signupBtn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.side-menu .loginBtn, .side-menu .signupBtn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.side-menu .logoutBtn {
+  background-color: #dc3545; /* Red for logout */
+  color: white;
+}
+
+/* Overlay for when side menu is open */
+.side-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Below side menu, above content */
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    height: 80px;
+    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .logo-img {
+    height: 80px;
+    width: auto;
+    max-width: 150px;
+  }
+
+  .navLinks {
+    display: flex !important;
+    justify-content: center;
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+
+  .navLinks .links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .navLinks .links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    min-width: 60px;
+  }
+
+  .navLinks .links a:hover {
+    color: var(--primary-color);
+  }
+
+  .authButtons {
+    display: flex !important;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  /* Hide mobile elements on desktop */
+  .mobile-menu-icon {
+    display: none;
+  }
+
+  .side-menu {
+    display: none;
+  }
+
+  .side-menu-overlay {
+    display: none;
+  }
+}

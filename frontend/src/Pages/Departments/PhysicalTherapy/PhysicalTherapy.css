@@ -1,0 +1,109 @@
+/* Overall Page Layout */
+.physical-therapy-page {
+  display: flex;
+  background-color: #f6fbf7; /* Light green background */
+  font-family: Arial, sans-serif;
+  margin-top: 100px; /* Space below the navbar */
+  gap: 30px; /* Space between sidebar and content */
+  padding: 20px; /* Added padding around the page */
+}
+
+/* Sidebar Navigation */
+.side-navigation {
+  width: 20%; /* Adjusted width */
+  background-color: #eaf4ec; /* Light green for sidebar */
+  padding: 10px; /* Compact padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 8px; /* Rounded corners */
+  display: flex;
+  flex-direction: column; /* Vertical alignment */
+  gap: 10px; /* Space between items */
+}
+
+.side-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-navigation li {
+  font-size: 1rem; /* Regular font size */
+  color: #001d56; /* Dark green text */
+  background: white; /* White item background */
+  border-radius: 5px; /* Rounded corners for items */
+  padding: 10px; /* Padding inside items */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.side-navigation li:hover {
+  background: #d4e9d3; /* Slight hover effect */
+  color: #046fa4;
+  font-weight: bold;
+}
+
+/* Main Content Section */
+.content {
+  flex: 1;
+  background-color: white; /* White content background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Header Section */
+.physical-therapy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eaf4ec; /* Light green background */
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.physical-therapy-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #070e6c;
+}
+
+.physical-therapy-image {
+  width: 40%; /* Adjusted image size */
+  border-radius: 8px;
+}
+
+/* Appointment Button */
+.appointment-btn {
+  background-color: #13007c; /* Green button */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.appointment-btn:hover {
+  background-color: #4d97ff;
+}
+
+/* Content Details Section */
+.physical-therapy-details {
+  color: #333;
+  line-height: 1.6;
+}
+
+.physical-therapy-details h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00043c;
+}
+
+.physical-therapy-details ul {
+  list-style: disc;
+  padding-left: 20px;
+}
