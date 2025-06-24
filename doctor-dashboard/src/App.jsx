@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import DoctorPatients from "./pages/DoctorPatients";
 import Settings from "./pages/Settings";
 import CompletedAppointments from "./pages/CompletedAppointments";
+import DoctorReviewDashboard from "./components/DoctorReviewDashboard";
 
 import { Context } from "./main";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -57,6 +58,7 @@ const AppContent = () => {
             <Route path="/completed-appointments" element={<CompletedAppointments />} />
             <Route path="/all-appointments" element={<Appointments />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/review-dashboard" element={<DoctorReviewDashboard />} />
 
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

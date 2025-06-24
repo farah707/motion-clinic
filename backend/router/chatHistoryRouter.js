@@ -4,7 +4,9 @@ import {
   getChatHistory, 
   getChatSession, 
   deleteChatSession, 
-  getChatStats 
+  getChatStats, 
+  getPendingForDoctor, 
+  doctorReview 
 } from "../controller/chatHistoryController.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 
@@ -24,5 +26,11 @@ router.delete("/session/:sessionId", isAuthenticated, deleteChatSession);
 
 // Get chat statistics
 router.get("/stats/:userId", isAuthenticated, getChatStats);
+
+// Get all pending items for doctor
+router.get("/pending/:doctorId", isAuthenticated, getPendingForDoctor);
+
+// Doctor reviews (approve/reject/edit) a message
+router.post("/review/:sessionId/:messageIndex", isAuthenticated, doctorReview);
 
 export default router; 

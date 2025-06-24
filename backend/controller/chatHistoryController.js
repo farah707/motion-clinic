@@ -246,4 +246,90 @@ export const getChatStats = catchAsyncErrors(async (req, res, next) => {
     console.error("Error getting chat stats:", error);
     return next(new ErrorHandler("Error retrieving chat statistics", 500));
   }
+});
+
+// Get all pending items for doctor
+export const getPendingForDoctor = catchAsyncErrors(async (req, res, next) => {
+  try {
+    const { doctorId } = req.params;
+    if (!doctorId || !mongoose.Types.ObjectId.isValid(doctorId)) {
+      return res.status(400).json({ success: false, message: 'Invalid or missing doctorId' });
+    }
+    // Find all messages with status 'pending' assigned to this doctor or unassigned
+    const sessions = await ChatHistory.find({
+      $or: [
+        { doctorId },
+        { doctorId: { $exists: false } }
+      ],
+      'messages.status': 'pending'
+    }).sort({ updatedAt: -1 });
+
+    // Convert imageData.data to base64 for all messages in all sessions
+    const sessionsObj = sessions.map(session => {
+      const obj = session.toObject();
+      obj.messages.forEach((message, index) => {
+        if (message.imageData && message.imageData.data) {
+          if (Buffer.isBuffer(message.imageData.data)) {
+            message.imageData.data = message.imageData.data.toString('base64');
+          } else if (
+            typeof message.imageData.data === 'object' &&
+            message.imageData.data.type === 'Buffer' &&
+            Array.isArray(message.imageData.data.data)
+          ) {
+            const buf = Buffer.from(message.imageData.data.data);
+            message.imageData.data = buf.toString('base64');
+          }
+        }
+      });
+      return obj;
+    });
+
+    res.status(200).json({ success: true, sessions: sessionsObj });
+  } catch (error) {
+    console.error("Error fetching pending items:", error);
+    return next(new ErrorHandler("Error fetching pending items", 500));
+  }
+});
+
+// Doctor reviews (approve/reject/edit) a message
+export const doctorReview = catchAsyncErrors(async (req, res, next) => {
+  try {
+    const { sessionId, messageIndex } = req.params;
+    const { doctorId, action, doctorEditedResponse, doctorComment } = req.body;
+    // action: 'approve' | 'reject'
+    if (!['approve', 'reject'].includes(action)) {
+      return next(new ErrorHandler("Invalid action", 400));
+    }
+    const chatSession = await ChatHistory.findById(sessionId);
+    if (!chatSession) {
+      return next(new ErrorHandler("Chat session not found", 404));
+    }
+    const message = chatSession.messages[messageIndex];
+    if (!message) {
+      return next(new ErrorHandler("Message not found", 404));
+    }
+    if (message.status !== 'pending') {
+      return next(new ErrorHandler("Message already reviewed", 400));
+    }
+    // Atomic update
+    message.status = action === 'approve' ? 'approved' : 'rejected';
+    message.approved = action === 'approve';
+    message.reviewedBy = doctorId;
+    message.reviewedAt = new Date();
+    if (action === 'approve') {
+      if (doctorEditedResponse) {
+        message.doctorEditedResponse = doctorEditedResponse;
+        message.content = doctorEditedResponse; // update content to edited
+      }
+      chatSession.doctorId = doctorId;
+    } else {
+      message.doctorComment = doctorComment || '';
+    }
+    await chatSession.save();
+    // Optionally, notify user (add a notification field or collection)
+    res.status(200).json({ success: true, message: `Message ${action}d successfully` });
+  } catch (error) {
+    console.error("Error in doctor review:", error);
+    return next(new ErrorHandler("Error in doctor review", 500));
+  }
 }); 

@@ -117,6 +117,7 @@ const NotificationBell = () => {
       case 'appointment_cancelled': return '❌';
       case 'status_change': return '🔄';
       case 'reminder': return '⏰';
+      case 'ai_response_pending': return '🤖';
       default: return '🔔';
     }
   };
@@ -239,7 +240,12 @@ const NotificationBell = () => {
                     backgroundColor: notification.isRead ? 'transparent' : 'rgba(37, 99, 235, 0.05)',
                     position: 'relative'
                   }}
-                  onClick={() => markAsRead(notification._id)}
+                  onClick={() => {
+                    markAsRead(notification._id);
+                    if (notification.type === 'ai_response_pending') {
+                      window.location.href = '/doctor-review';
+                    }
+                  }}
                   onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--background-color)'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = notification.isRead ? 'transparent' : 'rgba(37, 99, 235, 0.05)'}
                 >
@@ -269,7 +275,7 @@ const NotificationBell = () => {
                           color: 'var(--text-primary)'
                         }}
                       >
-                        {notification.title}
+                        {notification.type === 'ai_response_pending' ? 'AI Response Pending Review' : notification.title}
                       </div>
                       <div
                         style={{
@@ -279,7 +285,7 @@ const NotificationBell = () => {
                           lineHeight: '1.4'
                         }}
                       >
-                        {notification.message}
+                        {notification.type === 'ai_response_pending' ? 'A new AI chat or image analysis is awaiting your review.' : notification.message}
                       </div>
                       <div
                         style={{

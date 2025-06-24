@@ -336,75 +336,85 @@ const ChatHistory = () => {
             </div>
             
             <div className="session-messages timeline">
-              {selectedSession.messages.map((message, index) => (
-                <div key={index} className={`message ${message.role === 'user' ? 'user-message' : 'ai-message'} bubble-animate`}>
-                  <div className="message-content">
-                    <p>{message.content}</p>
-                    <span className="message-time">{formatTime(message.timestamp)}</span>
-                    {message.role === 'ai' && message.responseTime && (
-                      <div className="response-time">
-                        <small>Response time: {message.responseTime}ms</small>
-                      </div>
-                    )}
-                    {message.role === 'ai' && message.analysisResults && (
-                      <div className="analysis-results">
-                        <h4>Analysis Results:</h4>
-                        {message.imageData && (
-                          <div className="analysis-image">
-                            {(() => {
-                              try {
-                                const imageData = message.imageData.data;
-                                if (imageData) {
-                                  // Check if it's already a base64 string or needs conversion
-                                  let base64String;
-                                  if (typeof imageData === 'string') {
-                                    // Already a base64 string from backend
-                                    base64String = imageData;
-                                    console.log('[FRONTEND] Using base64 string from backend');
-                                  } else if (imageData && imageData.length > 0) {
-                                    // Convert from Buffer/Uint8Array
-                                    base64String = btoa(String.fromCharCode(...new Uint8Array(imageData)));
-                                    console.log('[FRONTEND] Converted from Buffer to base64');
-                                  } else {
-                                    throw new Error('Image data is empty or corrupted');
-                                  }
-                                  
-                                  return (
-                                    <img 
-                                      src={`data:${message.imageData.contentType};base64,${base64String}`}
-                                      alt="Medical Image"
-                                      className="medical-image"
-                                      onError={(e) => {
-                                        console.error('[FRONTEND] Image display error:', e);
-                                        e.target.style.display = 'none';
-                                        e.target.nextSibling.style.display = 'block';
-                                      }}
-                                    />
-                                  );
-                                } else {
-                                  return <p>Image data is empty or corrupted</p>;
-                                }
-                              } catch (error) {
-                                console.error('[FRONTEND] Error converting image data:', error);
-                                return <p>Error displaying image: {error.message}</p>;
-                              }
-                            })()}
-                          </div>
-                        )}
-                        <div className="analysis-details">
-                          <p><strong>Diagnosis:</strong> {message.analysisResults.diagnosis || 'Not determined'}</p>
-                          <p><strong>Confidence:</strong> {message.analysisResults.confidence || 'N/A'}</p>
-                          <p><strong>Findings:</strong> {message.analysisResults.findings || 'Not determined'}</p>
-                          <p><strong>Medication:</strong> {message.analysisResults.medication || 'Not determined'}</p>
-                          <p><strong>Recommendations:</strong> {message.analysisResults.recommendations || 'Not determined'}</p>
-                          <p><strong>Follow-up:</strong> {message.analysisResults.followUp || 'Not determined'}</p>
-                          <p><strong>Source:</strong> {message.analysisResults.source || 'AI Analysis'}</p>
+              {/* Only show approved messages to the user */}
+              {selectedSession.messages
+                .filter((message) =>
+                  message.role === 'user' || (message.role === 'ai' && message.status === 'approved')
+                )
+                .map((message, index) => (
+                  <div key={index} className={`message ${message.role === 'user' ? 'user-message' : 'ai-message'} bubble-animate`}>
+                    <div className="message-content">
+                      <p>{message.content}</p>
+                      <span className="message-time">{formatTime(message.timestamp)}</span>
+                      {message.role === 'ai' && message.responseTime && (
+                        <div className="response-time">
+                          <small>Response time: {message.responseTime}ms</small>
                         </div>
-                      </div>
-                    )}
+                      )}
+                      {message.role === 'ai' && message.analysisResults && (
+                        <div className="analysis-results">
+                          <h4>Analysis Results:</h4>
+                          {message.imageData && (
+                            <div className="analysis-image">
+                              {(() => {
+                                try {
+                                  const imageData = message.imageData.data;
+                                  if (imageData) {
+                                    let base64String;
+                                    if (typeof imageData === 'string') {
+                                      base64String = imageData;
+                                    } else if (imageData && imageData.length > 0) {
+                                      base64String = btoa(String.fromCharCode(...new Uint8Array(imageData)));
+                                    } else {
+                                      throw new Error('Image data is empty or corrupted');
+                                    }
+                                    return (
+                                      <img 
+                                        src={`data:${message.imageData.contentType};base64,${base64String}`}
+                                        alt="Medical Image"
+                                        className="medical-image"
+                                        onError={(e) => {
+                                          console.error('[FRONTEND] Image display error:', e);
+                                          e.target.style.display = 'none';
+                                          e.target.nextSibling.style.display = 'block';
+                                        }}
+                                      />
+                                    );
+                                  } else {
+                                    return <p>Image data is empty or corrupted</p>;
+                                  }
+                                } catch (error) {
+                                  console.error('[FRONTEND] Error converting image data:', error);
+                                  return <p>Error displaying image: {error.message}</p>;
+                                }
+                              })()}
+                            </div>
+                          )}
+                          <div className="analysis-details">
+                            <p><strong>Diagnosis:</strong> {message.analysisResults.diagnosis || 'Not determined'}</p>
+                            <p><strong>Confidence:</strong> {message.analysisResults.confidence || 'N/A'}</p>
+                            <p><strong>Findings:</strong> {message.analysisResults.findings || 'Not determined'}</p>
+                            <p><strong>Medication:</strong> {message.analysisResults.medication || 'Not determined'}</p>
+                            <p><strong>Recommendations:</strong> {message.analysisResults.recommendations || 'Not determined'}</p>
+                            <p><strong>Follow-up:</strong> {message.analysisResults.followUp || 'Not determined'}</p>
+                            <p><strong>Source:</strong> {message.analysisResults.source || 'AI Analysis'}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              {/* Show waiting or rejected state for latest AI/image message */}
+              {(() => {
+                const lastAI = selectedSession.messages.filter(m => m.role === 'ai').slice(-1)[0];
+                if (lastAI && lastAI.status === 'pending') {
+                  return <div className="message ai-message bubble-animate"><div className="message-content"><em>Waiting for doctor approval...</em></div></div>;
+                }
+                if (lastAI && lastAI.status === 'rejected') {
+                  return <div className="message ai-message bubble-animate"><div className="message-content"><em>Rejected by doctor{lastAI.doctorComment ? `: ${lastAI.doctorComment}` : ''}</em></div></div>;
+                }
+                return null;
+              })()}
             </div>
           </div>
         )}

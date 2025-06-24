@@ -5,6 +5,8 @@ import ChatHistory from "../models/chatHistorySchema.js";
 import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
+import { Notification } from "../models/notificationSchema.js";
+import mongoose from "mongoose";
 
 // TODO: Import your trained RAG model here
 // import { yourRAGModel } from '../utils/ragModel.js';
@@ -178,6 +180,29 @@ const saveImageAnalysisToHistory = async (userId, sessionId, imageType, imagePat
   }
 };
 
+// Helper to create doctor notification for pending LLM response
+async function notifyDoctorOfPendingLLM({ doctorId, userId, sessionId, chatType }) {
+  if (!doctorId) return;
+  try {
+    await Notification.create({
+      recipientId: doctorId,
+      recipientType: "Doctor",
+      type: "ai_response_pending",
+      title: "New AI Response Pending Review",
+      message: `A new ${chatType === 'image_analysis' ? 'image analysis' : 'AI chat'} from user ${userId} is awaiting your review.`,
+      data: {
+        patientId: userId,
+        doctorId,
+        sessionId,
+        chatType
+      }
+    });
+    console.log(`[NOTIFY] Doctor ${doctorId} notified of pending LLM response.`);
+  } catch (err) {
+    console.error('[NOTIFY] Error creating doctor notification:', err);
+  }
+}
+
 // Chat endpoint for AI assistant
 export const aiChat = catchAsyncErrors(async (req, res, next) => {
   try {
@@ -185,6 +210,14 @@ export const aiChat = catchAsyncErrors(async (req, res, next) => {
 
     if (!message || !message.trim()) {
       return next(new ErrorHandler("Message is required", 400));
+    }
+    if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
+      console.error("[AIChat] Invalid or missing userId:", userId);
+      return next(new ErrorHandler("Invalid or missing userId", 400));
+    }
+    if (!sessionId) {
+      console.error("[AIChat] Missing sessionId");
+      return next(new ErrorHandler("Missing sessionId", 400));
     }
 
     console.log(`AI Chat Request - User: ${userId}, Query: ${message}, Age: ${age}, Gender: ${gender}`);
@@ -194,76 +227,63 @@ export const aiChat = catchAsyncErrors(async (req, res, next) => {
       gender: gender || null
     };
 
-    // Check global cache first (fastest)
-    const cachedResponse = getCachedResponse(message, context);
-    if (cachedResponse) {
-      console.log('[CACHE] Using cached response');
-      
-      // Save to chat history even for cached responses
-      if (userId && sessionId) {
-        await saveToChatHistory(userId, sessionId, message, cachedResponse);
+    // Query the LLM (RAG model)
+    let llmResponse = null;
+    try {
+      llmResponse = await ragAssistant.query(message, context);
+    } catch (err) {
+      console.error("[AIChat] LLM error:", err);
+      return next(new ErrorHandler("AI model error", 500));
+    }
+
+    // Save to chat history as pending
+    try {
+      let chatSession = await ChatHistory.findOne({ userId, sessionId, type: 'ai_chat' });
+      if (!chatSession) {
+        chatSession = new ChatHistory({ userId, sessionId, type: 'ai_chat', messages: [] });
       }
-      
-      return res.status(200).json({
-        success: true,
-        response: cachedResponse.response || cachedResponse.answer,
-        retrieved_cases: cachedResponse.retrieved_cases || [],
+      // Add user message
+      chatSession.messages.push({
+        role: 'user',
+        content: message,
+        timestamp: new Date()
+      });
+      // Add AI response as pending
+      chatSession.messages.push({
+        role: 'ai',
+        content: llmResponse.response || llmResponse.answer || '',
         timestamp: new Date(),
-        query: message,
-        responseTime: 0
+        responseTime: llmResponse.responseTime,
+        retrievedCases: llmResponse.retrieved_cases || [],
+        status: 'pending',
+        approved: false
       });
-    }
-
-    // Try to initialize RAG model if not already initialized
-    if (!ragAssistant.isInitialized) {
-      console.log("RAG model not initialized, attempting to initialize...");
-      try {
-        const initialized = await ragAssistant.initialize();
-        if (!initialized) {
-          return next(new ErrorHandler("AI model not available", 503));
-        }
-      } catch (initError) {
-        console.error("RAG model initialization error:", initError);
-        return next(new ErrorHandler("AI model not available", 503));
+      if (chatSession.messages.length === 2) {
+        chatSession.title = chatSession.messages[0].content.length > 50 ? chatSession.messages[0].content.substring(0, 50) + '...' : chatSession.messages[0].content;
       }
+      await chatSession.save();
+      console.log('[AIChat] Saved pending LLM response for doctor approval');
+
+      // Find a doctor to notify (for demo, notify the first doctor)
+      const doctor = await (await import("../models/userSchema.js")).User.findOne({ role: "Doctor" });
+      if (doctor) {
+        await notifyDoctorOfPendingLLM({ doctorId: doctor._id, userId, sessionId, chatType: 'ai_chat' });
+      }
+    } catch (err) {
+      console.error('[AIChat] Error saving pending message:', err, { userId, sessionId, message });
+      return next(new ErrorHandler('Failed to save chat for doctor approval: ' + err.message, 500));
     }
 
-    // Query the RAG model with timeout
-    console.log('[RAG] Querying RAG model...');
-    const startTime = Date.now();
-    const ragResponse = await Promise.race([
-      ragAssistant.query(message, context),
-      new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('RAG timeout')), 30000) // 30 second timeout
-      )
-    ]);
-    
-    const responseTime = Date.now() - startTime;
-    console.log(`[RAG] Response received in ${responseTime}ms`);
-
-    // Cache the RAG response for future use
-    cacheResponse(message, context, ragResponse);
-
-    // Save to chat history
-    if (userId && sessionId) {
-      await saveToChatHistory(userId, sessionId, message, {
-        ...ragResponse,
-        responseTime
-      });
-    }
-
+    // Respond to user: waiting for doctor approval
     res.status(200).json({
       success: true,
-      response: ragResponse.response || ragResponse.answer || "I'm sorry, I couldn't process your request at the moment. Please try again.",
-      retrieved_cases: ragResponse.retrieved_cases || [],
-      timestamp: new Date(),
-      query: message,
-      responseTime: responseTime
+      response: null,
+      message: 'Waiting for doctor approval...',
+      waitingForApproval: true
     });
-
   } catch (error) {
     console.error("AI Chat Error:", error);
-    return next(new ErrorHandler("Error processing request", 500));
+    return next(new ErrorHandler("Error processing request: " + error.message, 500));
   }
 });
 
@@ -492,29 +512,13 @@ export const analyzeImage = catchAsyncErrors(async (req, res, next) => {
         source: jsonResponse.source || "AI Analysis",
       };
 
-      // Save to chat history with image data
+      // Save to chat history with image data as pending
       if (userId && sessionId) {
-        console.log('[CHAT HISTORY] Attempting to save image analysis:', { userId, sessionId, modelType });
         try {
-          // Find existing session or create new one
-          let chatSession = await ChatHistory.findOne({ 
-            userId, 
-            sessionId, 
-            type: 'image_analysis'
-          });
-
-          console.log('[CHAT HISTORY] Existing session found:', !!chatSession);
-
+          let chatSession = await ChatHistory.findOne({ userId, sessionId, type: 'image_analysis' });
           if (!chatSession) {
-            chatSession = new ChatHistory({
-              userId,
-              sessionId,
-              type: 'image_analysis',
-              messages: []
-            });
-            console.log('[CHAT HISTORY] Created new session');
+            chatSession = new ChatHistory({ userId, sessionId, type: 'image_analysis', messages: [] });
           }
-
           // Add user message (image upload)
           chatSession.messages.push({
             role: 'user',
@@ -527,10 +531,7 @@ export const analyzeImage = catchAsyncErrors(async (req, res, next) => {
               filename: req.file.originalname,
             }
           });
-
-          console.log('[CHAT HISTORY] Added user message with image data size:', imageBuffer.length);
-
-          // Add AI analysis response
+          // Add AI analysis response as pending
           chatSession.messages.push({
             role: 'ai',
             content: analysisResults.diagnosis || 'Analysis completed',
@@ -541,46 +542,34 @@ export const analyzeImage = catchAsyncErrors(async (req, res, next) => {
               data: imageBuffer,
               contentType: req.file.mimetype,
               filename: req.file.originalname,
-            }
+            },
+            status: 'pending',
+            approved: false
           });
-
-          console.log('[CHAT HISTORY] Added AI message with image data size:', imageBuffer.length);
-
-          // Update title
           if (chatSession.messages.length === 2) {
             chatSession.title = `${modelType.toUpperCase()} Image Analysis`;
           }
-
           await chatSession.save();
-          console.log('[CHAT HISTORY] Successfully saved image analysis to history with image data');
+          console.log('[IMAGE ANALYSIS] Saved pending image analysis for doctor approval');
 
-        } catch (historyError) {
-          console.error('[CHAT HISTORY] Error saving image analysis to history:', historyError);
-          console.error('[CHAT HISTORY] Error details:', {
-            message: historyError.message,
-            code: historyError.code,
-            name: historyError.name
-          });
-          
-          // Check if it's a document size issue
-          if (historyError.message && historyError.message.includes('document too large')) {
-            console.error('[CHAT HISTORY] Document size limit exceeded. Image size:', imageBuffer.length, 'bytes');
+          // Find a doctor to notify (for demo, notify the first doctor)
+          const doctor = await (await import("../models/userSchema.js")).User.findOne({ role: "Doctor" });
+          if (doctor) {
+            await notifyDoctorOfPendingLLM({ doctorId: doctor._id, userId, sessionId, chatType: 'image_analysis' });
           }
+        } catch (historyError) {
+          console.error('[IMAGE ANALYSIS] Error saving image analysis to history:', historyError);
+          return next(new ErrorHandler('Failed to save image analysis for doctor approval', 500));
         }
       } else {
-        console.log('[CHAT HISTORY] Skipping chat history save - missing userId or sessionId:', { userId: !!userId, sessionId: !!sessionId });
+        console.log('[IMAGE ANALYSIS] Skipping chat history save - missing userId or sessionId:', { userId: !!userId, sessionId: !!sessionId });
       }
 
+      // Respond to user: waiting for doctor approval
       res.status(200).json({
         success: true,
-        diagnosis: analysisResults.diagnosis,
-        confidence: analysisResults.confidence,
-        findings: analysisResults.findings,
-        recommendations: analysisResults.recommendations,
-        followUp: analysisResults.followUp,
-        medication: analysisResults.medication,
-        source: analysisResults.source,
-        timestamp: new Date()
+        message: 'Waiting for doctor approval...',
+        waitingForApproval: true
       });
     } catch (parseError) {
       console.error('Error parsing Python response:', parseError);

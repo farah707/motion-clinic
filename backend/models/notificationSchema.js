@@ -13,7 +13,14 @@ const notificationSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["appointment_booking", "appointment_update", "appointment_cancelled", "status_change", "reminder"],
+    enum: [
+      "appointment_booking",
+      "appointment_update",
+      "appointment_cancelled",
+      "status_change",
+      "reminder",
+      "ai_response_pending"
+    ],
     required: true,
   },
   title: {
@@ -37,6 +44,8 @@ const notificationSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    sessionId: String,
+    chatType: String,
     appointmentDate: Date,
     appointmentTime: String,
     status: String,

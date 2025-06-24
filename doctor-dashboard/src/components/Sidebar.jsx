@@ -28,6 +28,11 @@ const Sidebar = () => {
       path: "/all-appointments",
       label: "All Appointments",
       icon: "📋"
+    },
+    {
+      path: "/review-dashboard",
+      label: "AI Review",
+      icon: "🤖"
     }
   ];
 

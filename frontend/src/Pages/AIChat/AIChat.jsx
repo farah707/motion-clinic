@@ -59,16 +59,13 @@ const ChatWindow = () => {
         age: user?.age,
         gender: user?.gender
       });
-      const data = response.data;
-      
-      const aiMessage = {
+      // Show waiting for doctor approval message
+      setMessages(prev => [...prev, {
         id: Date.now() + 1,
-        text: data.response || "Sorry, I couldn't process that.",
+        text: 'Waiting for doctor approval...',
         sender: 'ai',
-        timestamp: new Date(),
-        responseTime: data.responseTime
-      };
-      setMessages(prev => [...prev, aiMessage]);
+        timestamp: new Date()
+      }]);
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = { id: Date.now() + 1, text: "An error occurred. Please try again.", sender: 'ai', timestamp: new Date() };
@@ -189,7 +186,9 @@ const ImageAnalysisWindow = () => {
       const response = await axios.post('/api/ai/image-analyze', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      if (response.data.success) {
+      if (response.data.waitingForApproval) {
+        setAnalysisResult({ waiting: true });
+      } else if (response.data.success) {
         setAnalysisResult(response.data);
       } else {
         setError(response.data.message || 'Analysis failed.');
@@ -224,27 +223,35 @@ const ImageAnalysisWindow = () => {
           </button>
         </div>
       </div>
-      {error && <div className="error-message">{error}</div>}
-      <div className="analysis-content">
+      {preview && (
         <div className="image-preview">
-          {preview ? <img src={preview} alt="Selected Preview" /> : <div className="placeholder">Image Preview</div>}
+          <img src={preview} alt="Preview" />
         </div>
-        <div className="analysis-results">
-          {isLoading && <div className="typing-indicator"><span></span><span></span><span></span></div>}
-          {analysisResult ? (
-            <div className="result-card">
-              <h3>Analysis Report</h3>
-              <p><strong>Source:</strong> {analysisResult.source || 'N/A'}</p>
-              <p><strong>Confidence:</strong> {analysisResult.confidence || 'N/A'}</p>
-              <p><strong>Diagnosis:</strong> {analysisResult.diagnosis || 'Not determined'}</p>
-              <p><strong>Findings:</strong> {analysisResult.findings || 'Not determined'}</p>
-              <p><strong>Medication:</strong> {analysisResult.medication || 'Not determined'}</p>
-              <p><strong>Recommendations:</strong> {analysisResult.recommendations || 'Not determined'}</p>
-              <p><strong>Follow-up:</strong> {analysisResult.followUp || 'Not determined'}</p>
-            </div>
-          ) : !isLoading && <div className="placeholder">Results will appear here.</div>}
+      )}
+      {isLoading && <div className="loading">Analyzing image...</div>}
+      {analysisResult && analysisResult.waiting && (
+        <div className="waiting-approval">Waiting for doctor approval...</div>
+      )}
+      {analysisResult && !analysisResult.waiting && (
+        <div className="analysis-result">
+          <div className="analysis-results">
+            {isLoading && <div className="typing-indicator"><span></span><span></span><span></span></div>}
+            {analysisResult ? (
+              <div className="result-card">
+                <h3>Analysis Report</h3>
+                <p><strong>Source:</strong> {analysisResult.source || 'N/A'}</p>
+                <p><strong>Confidence:</strong> {analysisResult.confidence || 'N/A'}</p>
+                <p><strong>Diagnosis:</strong> {analysisResult.diagnosis || 'Not determined'}</p>
+                <p><strong>Findings:</strong> {analysisResult.findings || 'Not determined'}</p>
+                <p><strong>Medication:</strong> {analysisResult.medication || 'Not determined'}</p>
+                <p><strong>Recommendations:</strong> {analysisResult.recommendations || 'Not determined'}</p>
+                <p><strong>Follow-up:</strong> {analysisResult.followUp || 'Not determined'}</p>
+              </div>
+            ) : !isLoading && <div className="placeholder">Results will appear here.</div>}
+          </div>
         </div>
-      </div>
+      )}
+      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };

@@ -6,6 +6,11 @@ const chatHistorySchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  doctorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: false,
+  },
   sessionId: {
     type: String,
     required: true,
@@ -18,7 +23,7 @@ const chatHistorySchema = new mongoose.Schema({
   messages: [{
     role: {
       type: String,
-      enum: ['user', 'ai'],
+      enum: ['user', 'ai', 'doctor'],
       required: true,
     },
     content: {
@@ -29,6 +34,23 @@ const chatHistorySchema = new mongoose.Schema({
       type: Date,
       default: Date.now,
     },
+    // Approval workflow fields
+    status: {
+      type: String,
+      enum: ['pending', 'approved', 'rejected'],
+      default: 'pending',
+    },
+    approved: {
+      type: Boolean,
+      default: false,
+    },
+    doctorEditedResponse: String,
+    doctorComment: String,
+    reviewedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    reviewedAt: Date,
     // For AI chat messages
     responseTime: Number,
     retrievedCases: [{
