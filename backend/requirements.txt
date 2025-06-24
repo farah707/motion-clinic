@@ -1,0 +1,26 @@
+# RAG Medical Assistant Dependencies - Compatible with Python 3.13
+# Base requirements
+Flask
+numpy
+pandas
+faiss-cpu
+sentence-transformers
+scikit-learn
+torch
+torchvision
+transformers
+accelerate
+sentencepiece
+evaluate
+nltk
+rouge_score
+pydicom
+Pillow
+openpyxl
+gunicorn
+python-dotenv
+sacremoses>=0.0.53
+flask-ngrok>=0.0.25
+pyngrok>=7.0.5
+fastapi>=0.104.1
+uvicorn>=0.24.0 

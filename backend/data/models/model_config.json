@@ -1,0 +1,6 @@
+{
+  "embedding_model": "all-MiniLM-L6-v2",
+  "model_type": "lightweight",
+  "num_cases": 2000,
+  "embedding_dim": 384
+}

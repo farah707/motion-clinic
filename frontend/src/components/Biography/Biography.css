@@ -1,0 +1,40 @@
+/* Biography Section */
+.biography-container {
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+}
+
+.biography {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.banner.image-banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.banner.text-banner h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.banner.text-banner p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+@media (min-width: 925px) {
+    .biography {
+        flex-direction: row;
+    }
+
+    .banner.image-banner, .banner.text-banner {
+        flex: 1;
+    }
+}

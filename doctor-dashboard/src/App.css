@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 20px;
+  background: #f2f2f2;
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar nav a {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.login-page {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+/* Settings page subtitle styling */
+.dashboard-header p {
+  color: white !important;
+  margin-top: 0.5rem;
+}
+
+/* Notification dropdown responsive positioning */
+.notification-dropdown {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  left: auto !important;
+  width: 400px !important;
+  max-width: 90vw !important;
+  z-index: 1000 !important;
+}
+
+@media (max-width: 500px) {
+  .notification-dropdown {
+    right: -50px !important;
+    width: 350px !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .notification-dropdown {
+    right: -100px !important;
+    width: 300px !important;
+  }
+}
