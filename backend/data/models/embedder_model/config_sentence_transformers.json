@@ -2,7 +2,11 @@
   "__version__": {
     "sentence_transformers": "4.0.2",
     "transformers": "4.51.1",
+<<<<<<< HEAD
     "pytorch": "2.7.1+cpu"
+=======
+    "pytorch": "2.6.0+cpu"
+>>>>>>> 1b80677d0ef6ff760cd12514c3dce0a53d189e5f
   },
   "prompts": {},
   "default_prompt_name": null,
