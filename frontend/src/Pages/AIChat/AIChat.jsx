@@ -27,10 +27,6 @@ const ChatWindow = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   // Show/hide scroll-to-bottom button
   useEffect(() => {
     const handleScroll = () => {
@@ -127,7 +123,8 @@ const ChatWindow = () => {
             disabled={isLoading}
           />
           <button onClick={handleSendMessage} disabled={isLoading || !inputMessage.trim()} className="send-button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22,2 15,22 11,13 2,9"></polygon></svg>
+            {/* Standard paper plane send icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22,2 15,22 11,13 2,9"></polygon></svg>
           </button>
         </div>
       </div>
@@ -234,22 +231,22 @@ const ImageAnalysisWindow = () => {
       )}
       {analysisResult && !analysisResult.waiting && (
         <div className="analysis-result">
-          <div className="analysis-results">
-            {isLoading && <div className="typing-indicator"><span></span><span></span><span></span></div>}
-            {analysisResult ? (
-              <div className="result-card">
-                <h3>Analysis Report</h3>
-                <p><strong>Source:</strong> {analysisResult.source || 'N/A'}</p>
+        <div className="analysis-results">
+          {isLoading && <div className="typing-indicator"><span></span><span></span><span></span></div>}
+          {analysisResult ? (
+            <div className="result-card">
+              <h3>Analysis Report</h3>
+              <p><strong>Source:</strong> {analysisResult.source || 'N/A'}</p>
                 <p><strong>Confidence:</strong> {analysisResult.confidence || 'N/A'}</p>
                 <p><strong>Diagnosis:</strong> {analysisResult.diagnosis || 'Not determined'}</p>
                 <p><strong>Findings:</strong> {analysisResult.findings || 'Not determined'}</p>
                 <p><strong>Medication:</strong> {analysisResult.medication || 'Not determined'}</p>
-                <p><strong>Recommendations:</strong> {analysisResult.recommendations || 'Not determined'}</p>
+              <p><strong>Recommendations:</strong> {analysisResult.recommendations || 'Not determined'}</p>
                 <p><strong>Follow-up:</strong> {analysisResult.followUp || 'Not determined'}</p>
-              </div>
-            ) : !isLoading && <div className="placeholder">Results will appear here.</div>}
-          </div>
+            </div>
+          ) : !isLoading && <div className="placeholder">Results will appear here.</div>}
         </div>
+      </div>
       )}
       {error && <div className="error-message">{error}</div>}
     </div>
@@ -271,10 +268,10 @@ const AIChat = () => {
 
       <div className="ai-chat-tabs">
         <button className={`tab-btn ${activeTab === 'chat' ? 'active' : ''}`} onClick={() => setActiveTab('chat')}>
-          AI Chat
+          <span id="ai-chat-tab-text">AI Chat</span>
         </button>
         <button className={`tab-btn ${activeTab === 'image' ? 'active' : ''}`} onClick={() => setActiveTab('image')}>
-          Medical Image Analysis
+          <span id="medical-image-tab-text">Medical Image Analysis</span>
         </button>
       </div>
 

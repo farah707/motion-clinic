@@ -319,7 +319,16 @@ export const doctorReview = catchAsyncErrors(async (req, res, next) => {
     if (action === 'approve') {
       if (doctorEditedResponse) {
         message.doctorEditedResponse = doctorEditedResponse;
-        message.content = doctorEditedResponse; // update content to edited
+        if (typeof doctorEditedResponse === 'object' && message.analysisResults) {
+          // Update analysisResults fields if present
+          Object.assign(message.analysisResults, doctorEditedResponse);
+        } else if (typeof doctorEditedResponse === 'string') {
+          message.content = doctorEditedResponse; // update content to edited
+        }
+        // If it's an object and message.content is a string, optionally update content summary
+        if (typeof doctorEditedResponse === 'object' && doctorEditedResponse.diagnosis) {
+          message.content = doctorEditedResponse.diagnosis;
+        }
       }
       chatSession.doctorId = doctorId;
     } else {

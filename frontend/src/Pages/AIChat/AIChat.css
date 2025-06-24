@@ -275,6 +275,7 @@
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease;
+  color: #4facfe !important;
 }
 
 .send-button:hover:not(:disabled) svg {
@@ -472,6 +473,8 @@
   background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   padding: 6px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  position: static !important;
+  z-index: 1; /* Lower than navbar */
 }
 
 .tab-btn {
@@ -517,6 +520,8 @@
   color: white !important;
   box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
   transform: translateY(-1px);
+  z-index: 1;
+  background: linear-gradient(135deg, #667eea 0%, #003366 100%);
 }
 
 .tab-btn.active span {
@@ -524,8 +529,10 @@
   z-index: 10;
 }
 
+.tab-btn.active,
+.tab-btn.active span,
 .tab-btn.active * {
-  color: white !important;
+  color: #fff !important;
 }
 
 .tab-btn:hover:not(.active) {
@@ -827,4 +834,9 @@ input[type="file"] {
 
 .ai-chat-tabs .tab-btn.active::before {
   z-index: 1 !important;
+}
+
+.tab-btn.active #ai-chat-tab-text,
+.tab-btn.active #medical-image-tab-text {
+  color: #fff !important;
 } 

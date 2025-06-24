@@ -108,7 +108,7 @@ const saveToChatHistory = async (userId, sessionId, message, responseData) => {
     if (chatSession.messages.length === 2) {
       const firstMessage = chatSession.messages[0].content;
       chatSession.title = firstMessage.length > 50 ? firstMessage.substring(0, 50) + '...' : firstMessage;
-    }
+  }
 
     await chatSession.save();
     console.log('[CHAT HISTORY] Saved message to history');

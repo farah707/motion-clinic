@@ -14,9 +14,10 @@
 .form-component h2 {
   font-size: 2.8rem;
   font-weight: 600;
-  background: linear-gradient(90deg, #2f8bff, #60b4ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #030055 !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
   text-align: center;
   margin-bottom: 2.5rem;
 }

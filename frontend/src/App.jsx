@@ -148,7 +148,7 @@ const App = () => {
               <Route path="/physical-therapy" element={<PhysicalTherapy />} />
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/about" element={<AboutUs />} />
-              <Route path="/ai-chat" element={<AIChat />} />
+              <Route path="/ai-chat" element={isAuthenticated ? <AIChat /> : <Navigate to="/login" />} />
               <Route path="/chat-history" element={isAuthenticated ? <ChatHistory /> : <Navigate to="/login" />} />
               <Route path="/signup" element={<Register />} />
               <Route path="/login" element={<Login />} />
