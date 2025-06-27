@@ -67,7 +67,7 @@ const DoctorPatients = () => {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h2>👨‍⚕️ My Patients with Appointments</h2>
+      <h2 style={{ color: '#0a192f' }}>👨‍⚕️ My Patients with Appointments</h2>
       {loading ? (
         <p>Loading...</p>
       ) : patients.length > 0 ? (
@@ -160,7 +160,7 @@ const DoctorPatients = () => {
                 <hr />
                 <h4>🩺 Vital Signs</h4>
                 <p><strong>Blood Pressure:</strong> {patient.bloodPressure || "N/A"}</p>
-                <p><strong>Oxygen Level:</strong> {patient.oxygenLevel || "N/A"}%</p>
+                <p><strong>Oxygen Level:</strong> {patient.oxygenLevel || "N/A"} %</p>
                 <p><strong>Heart Rate:</strong> {patient.heartRate || "N/A"} bpm</p>
                 <p><strong>Temperature:</strong> {patient.temperature || "N/A"} °C</p>
                 <button onClick={() => handleEditClick(patient)}>✏️ Edit</button>

@@ -49,15 +49,24 @@ const DoctorReviewDashboard = () => {
     setActionLoading(true);
     try {
       const session = pendingItems[selected.sessionIdx];
-      await axios.post(`/api/chat-history/review/${session._id}/${selected.msgIdx}`, {
-        doctorId,
+      // Ensure doctorId and action are always sent, and doctorEditedResponse is string or object
+      const payload = {
+        doctorId: doctorId,
         action: "approve",
         doctorEditedResponse: editResponse
-      });
+      };
+      await axios.post(`/api/chat-history/review/${session._id}/${selected.msgIdx}`, payload);
       toast.success("Approved and sent to user!");
       fetchPending();
       setSelected(null);
     } catch (err) {
+      // Log the payload and error for debugging
+      console.error("Review Approve Error Payload:", {
+        doctorId,
+        action: "approve",
+        doctorEditedResponse: editResponse
+      });
+      console.error("Review Approve Error:", err, err?.response?.data);
       toast.error("Failed to approve");
     } finally {
       setActionLoading(false);
@@ -69,15 +78,23 @@ const DoctorReviewDashboard = () => {
     setActionLoading(true);
     try {
       const session = pendingItems[selected.sessionIdx];
-      await axios.post(`/api/chat-history/review/${session._id}/${selected.msgIdx}`, {
-        doctorId,
+      const payload = {
+        doctorId: doctorId,
         action: "reject",
         doctorComment: "Not appropriate. Please revise."
-      });
+      };
+      await axios.post(`/api/chat-history/review/${session._id}/${selected.msgIdx}`, payload);
       toast.info("Rejected and user notified.");
       fetchPending();
       setSelected(null);
     } catch (err) {
+      // Log the payload and error for debugging
+      console.error("Review Reject Error Payload:", {
+        doctorId,
+        action: "reject",
+        doctorComment: "Not appropriate. Please revise."
+      });
+      console.error("Review Reject Error:", err, err?.response?.data);
       toast.error("Failed to reject");
     } finally {
       setActionLoading(false);

@@ -376,19 +376,19 @@ const PatientProfile = () => {
 
         <div className="profile-info">
           <div className="profile-box">
-            <h3>{t("medicalHistoryAndComplaints")}</h3>
-            <p><strong>{t("medicalHistoryLabel")}</strong> {isEditing ? <textarea name="medicalHistory" value={formData.medicalHistory} onChange={handleChange} className="input-textarea" /> : userDetails.medicalHistory || t("noHistoryAvailable")}</p>
-            <p><strong>{t("complainLabel")}</strong> {isEditing ? <textarea name="complain" value={formData.complain} onChange={handleChange} className="input-textarea" /> : userDetails.complain || t("noComplaint")}</p>
+            <h3>{t("medical History And Complaints")}</h3>
+            <p><strong>{t("medical History")}</strong> {isEditing ? <textarea name="medical History" value={formData.medicalHistory} onChange={handleChange} className="input-textarea" /> : userDetails.medicalHistory || t("noHistoryAvailable")}</p>
+            <p><strong>{t("complain")}</strong> {isEditing ? <textarea name="complain" value={formData.complain} onChange={handleChange} className="input-textarea" /> : userDetails.complain || t("noComplaint")}</p>
           </div>
         </div>
 
         <div className="profile-info">
           <div className="profile-box">
             <h3>{t("vitalSigns")}</h3>
-            <p><strong>{t("bloodPressureLabel")}</strong> {isEditing ? <textarea name="bloodPressure" value={formData.bloodPressure} onChange={handleChange} className="input-textarea" /> : userDetails.bloodPressure || t("noBloodPressureAvailable")}</p>
-            <p><strong>{t("oxygenLevelLabel")}</strong> {isEditing ? <textarea name="oxygenLevel" value={formData.oxygenLevel} onChange={handleChange} className="input-textarea" /> : userDetails.oxygenLevel || t("noOxygenLevelAvailable")}</p>
-            <p><strong>{t("heartRateLabel")}</strong> {isEditing ? <textarea name="heartRate" value={formData.heartRate} onChange={handleChange} className="input-textarea" /> : userDetails.heartRate || t("noHeartRateAvailable")}</p>
-            <p><strong>{t("temperatureLabel")}</strong> {isEditing ? <textarea name="temperature" value={formData.temperature} onChange={handleChange} className="input-textarea" /> : userDetails.temperature || t("noTemperatureAvailable")}</p>
+            <p><strong>{t("blood Pressure")}</strong> {isEditing ? <textarea name="bloodPressure" value={formData.bloodPressure} onChange={handleChange} className="input-textarea" /> : userDetails.bloodPressure || t("noBloodPressureAvailable")}</p>
+            <p><strong>{t("oxygen Level")}</strong> {isEditing ? <textarea name="oxygenLevel" value={formData.oxygenLevel} onChange={handleChange} className="input-textarea" /> : userDetails.oxygenLevel || t("noOxygenLevelAvailable")}</p>
+            <p><strong>{t("heart Rate")}</strong> {isEditing ? <textarea name="heartRate" value={formData.heartRate} onChange={handleChange} className="input-textarea" /> : userDetails.heartRate || t("noHeartRateAvailable")}</p>
+            <p><strong>{t("temperature")}</strong> {isEditing ? <textarea name="temperature" value={formData.temperature} onChange={handleChange} className="input-textarea" /> : userDetails.temperature || t("noTemperatureAvailable")}</p>
           </div>
         </div>
 

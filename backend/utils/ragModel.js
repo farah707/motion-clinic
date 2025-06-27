@@ -11,41 +11,7 @@ class RAGMedicalAssistant {
     this.isLoading = false;
     this.pythonScriptPath = path.join(process.cwd(), 'scripts', 'lightweight_rag_processor.py');
     this.modelPath = path.join(process.cwd(), 'data', 'models');
-    this.responseCache = new Map();
-    this.cacheMaxSize = 500; // Much larger cache
     this.modelLoaded = false;
-  }
-
-  // Get cached response if available
-  getCachedResponse(query, context) {
-    const cacheKey = this.generateCacheKey(query, context);
-    const cached = this.responseCache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < 1800000) { // 30 minutes cache
-      console.log('[RAG] Using cached response');
-      return cached.response;
-    }
-    return null;
-  }
-
-  // Store response in cache
-  cacheResponse(query, context, response) {
-    const cacheKey = this.generateCacheKey(query, context);
-    this.responseCache.set(cacheKey, {
-      response,
-      timestamp: Date.now()
-    });
-    
-    // Limit cache size
-    if (this.responseCache.size > this.cacheMaxSize) {
-      const firstKey = this.responseCache.keys().next().value;
-      this.responseCache.delete(firstKey);
-    }
-  }
-
-  // Generate cache key from query and context
-  generateCacheKey(query, context) {
-    const normalizedQuery = query.toLowerCase().trim().substring(0, 100);
-    return `${normalizedQuery}_${context.age || 'noage'}_${context.gender || 'nogender'}`;
   }
 
   // Initialize the RAG model
@@ -101,16 +67,7 @@ class RAGMedicalAssistant {
     }
 
     try {
-      // Check cache first
-      const cachedResponse = this.getCachedResponse(userQuery, context);
-      if (cachedResponse) {
-        const responseTime = Date.now() - startTime;
-        console.log(`[RAG] Cached response in ${responseTime}ms`);
-        return cachedResponse;
-      }
-
       const response = await this.callPythonRAG(userQuery, context);
-      this.cacheResponse(userQuery, context, response);
       
       const responseTime = Date.now() - startTime;
       console.log(`[RAG] Query processed in ${responseTime}ms`);
