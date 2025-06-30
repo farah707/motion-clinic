@@ -34,35 +34,6 @@ const mockRAGResponse = async (query) => {
   return responses.default;
 };
 
-// Global cache for RAG responses
-const globalResponseCache = new Map();
-const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
-
-// Get cached response
-const getCachedResponse = (query, context) => {
-  const cacheKey = `${query.toLowerCase().trim()}_${context.age || 'noage'}_${context.gender || 'nogender'}`;
-  const cached = globalResponseCache.get(cacheKey);
-  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-    return cached.response;
-  }
-  return null;
-};
-
-// Cache response
-const cacheResponse = (query, context, response) => {
-  const cacheKey = `${query.toLowerCase().trim()}_${context.age || 'noage'}_${context.gender || 'nogender'}`;
-  globalResponseCache.set(cacheKey, {
-    response,
-    timestamp: Date.now()
-  });
-  
-  // Limit cache size
-  if (globalResponseCache.size > 500) {
-    const firstKey = globalResponseCache.keys().next().value;
-    globalResponseCache.delete(firstKey);
-  }
-};
-
 // Save chat message to history
 const saveToChatHistory = async (userId, sessionId, message, responseData) => {
   try {

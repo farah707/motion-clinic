@@ -1,0 +1,70 @@
+.search-container {
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.search-box {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 15px 20px 15px 50px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.search-box input::placeholder {
+  color: #999;
+  font-size: 15px;
+}
+
+.search-box input:focus {
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.search-box:focus-within .search-icon {
+  color: #2563eb;
+}
+
+/* Add a subtle animation when focusing the search box */
+@keyframes searchFocus {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.search-box:focus-within {
+  animation: searchFocus 0.3s ease;
+} 

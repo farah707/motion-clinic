@@ -91,8 +91,7 @@ class LightweightMedicalRAG:
                 'patient_id': row.get('Patient id', 'Unknown'),
                 'diagnosis': row.get('Diagnosis', 'Unknown'),
                 'treatment': row.get('Treatment plan', 'Unknown'),
-                'medications': row.get('Medications prescribed', 'Unknown'),
-                'similarity_score': float(D[0][i])
+                'medications': row.get('Medications prescribed', 'Unknown')
             }
             result.append(case_info)
         

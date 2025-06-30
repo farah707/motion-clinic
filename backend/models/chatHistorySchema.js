@@ -44,7 +44,10 @@ const chatHistorySchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     },
-    doctorEditedResponse: String,
+    doctorEditedResponse: {
+      type: mongoose.Schema.Types.Mixed,
+      default: '',
+    },
     doctorComment: String,
     reviewedBy: {
       type: mongoose.Schema.Types.ObjectId,

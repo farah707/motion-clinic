@@ -449,7 +449,8 @@ export const updateAppointmentTime = catchAsyncErrors(async (req, res, next) => 
     // Update the appointment
     appointment.appointment_date = newDate;
     appointment.appointment_time = newTime;
-    appointment.status = "updated"; // Set status to updated for admin notification
+    appointment.status = "pending"; // Set status to pending for admin notification
+    appointment.isEdited = true; // Mark as edited for admin review
     await appointment.save();
 
     console.log("Appointment updated successfully:", appointment);
