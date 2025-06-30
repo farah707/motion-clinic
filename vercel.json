@@ -8,13 +8,9 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
-<<<<<<< HEAD
-      "config": { "distDir": "build" }
-=======
       "config": {
         "distDir": "dist"
       }
->>>>>>> 1ba778016265792004cfec95a6bd6b4a80f51191
     }
   ],
   "routes": [
