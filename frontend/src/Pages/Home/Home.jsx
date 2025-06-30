@@ -15,6 +15,7 @@ const Home = () => {
         <h1>{t("home_welcome")}</h1>
         <p>{t("home_excellence")}</p>
         <button className="call-now-btn">{t("home_call_now")}</button>
+        <img src="/Hero.jpg" alt="Hero" className="hero-image" />
       </div>
 
       <div className="home-cards-container">
