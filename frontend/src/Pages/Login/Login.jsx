@@ -33,7 +33,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/user/patient/login",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/patient/login`,
         { email, password, role },
         {
           withCredentials: true,

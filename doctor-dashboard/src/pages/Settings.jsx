@@ -55,7 +55,7 @@ const Settings = () => {
       setLoading(true);
       const token = localStorage.getItem('authToken');
       
-      await axios.put("http://localhost:4000/api/v1/user/update-profile", {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/user/update-profile`, {
         emailNotificationsEnabled: settings.emailAlerts
       }, {
         headers: {
@@ -77,7 +77,7 @@ const Settings = () => {
       setProfileLoading(true);
       const token = localStorage.getItem('authToken');
       
-      const response = await axios.put("http://localhost:4000/api/v1/user/update-profile", profileData, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/user/update-profile`, profileData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

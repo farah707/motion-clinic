@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
   // Check if the user is authenticated (You could check a token or user data here)
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/user/patient/me", { withCredentials: true })
+      .get(`${import.meta.env.VITE_API_URL}/api/v1/user/patient/me`, { withCredentials: true })
       .then((response) => {
         setUser(response.data.user);
         setIsAuthenticated(true);

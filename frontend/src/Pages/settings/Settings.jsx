@@ -72,7 +72,7 @@ const Settings = () => {
 
   const fetchNotificationSettings = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/user/notification-settings", {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/notification-settings`, {
         withCredentials: true
       });
       const { settings } = response.data;
@@ -146,7 +146,7 @@ const Settings = () => {
       });
 
       const response = await axios.put(
-        "http://localhost:4000/api/v1/user/notification-settings/update",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/notification-settings/update`,
         {
           emailNotificationsEnabled,
           notificationDays,
@@ -185,7 +185,7 @@ const Settings = () => {
     try {
       // Assuming an API endpoint for updating user profile
       const response = await axios.put(
-        "http://localhost:4000/api/v1/user/update-profile", // Adjust this endpoint as needed
+        `${import.meta.env.VITE_API_URL}/api/v1/user/update-profile`, // Adjust this endpoint as needed
         profileData,
         { withCredentials: true }
       );

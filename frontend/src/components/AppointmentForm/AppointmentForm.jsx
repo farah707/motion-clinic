@@ -6,7 +6,7 @@ import "./Appointment.css";
 import { useTranslation } from "react-i18next";
 import { Context } from "../../main";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const AppointmentForm = () => {
   const { t } = useTranslation();

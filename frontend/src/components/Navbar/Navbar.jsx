@@ -23,7 +23,7 @@ const Navbar = () => {
       sessionStorage.clear();
       console.log("Local storage cleared");
 
-      await axios.post("http://localhost:4000/api/v1/user/logout", {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/user/logout`, {}, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json'

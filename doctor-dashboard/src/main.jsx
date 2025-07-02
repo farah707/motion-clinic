@@ -19,7 +19,7 @@ const AppWrapper = () => {
         const token = localStorage.getItem('authToken');
         if (token) {
           // Verify token with backend
-          const response = await axios.get("http://localhost:4000/api/v1/user/doctor/me", {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/doctor/me`, {
             withCredentials: true,
             headers: {
               Authorization: `Bearer ${token}`

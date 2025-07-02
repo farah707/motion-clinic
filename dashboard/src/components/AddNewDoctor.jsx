@@ -39,7 +39,7 @@ const AddNewDoctor = () => {
       };
 
       await axios
-        .post("http://localhost:4000/api/v1/user/doctor/addnew", formData, {
+        .post(`${import.meta.env.VITE_API_URL}/api/v1/user/doctor/addnew`, formData, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         })

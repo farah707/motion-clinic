@@ -27,7 +27,7 @@ const Doctors = () => {
     const fetchDoctors = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/user/doctors",
+          "${import.meta.env.VITE_API_URL}/api/v1/user/doctors",
           { withCredentials: true }
         );
         if (data && data.doctors) {
@@ -63,7 +63,7 @@ const Doctors = () => {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:4000/api/v1/user/doctor/delete/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/user/doctor/delete/${id}`,
         { withCredentials: true }
       );
       toast.success(data.message);
@@ -82,7 +82,7 @@ const Doctors = () => {
 
     try {
         const { data } = await axios.put(
-            `http://localhost:4000/api/v1/user/doctor/update/${editingDoctor._id}`,
+            `${import.meta.env.VITE_API_URL}/api/v1/user/doctor/update/${editingDoctor._id}`,
             {
               ...updateData,
               doctorDepartment: updateData.department // Map department to doctorDepartment

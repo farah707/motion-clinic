@@ -8,7 +8,7 @@ const GoogleAuthButton = () => {
 
   return (
     <div className="google-auth-container">
-      <a href={`http://localhost:4000/api/v1/user/auth/google?redirect_url=${redirectUrl}`} className="google-btn">
+      <a href={`${import.meta.env.VITE_API_URL}/api/v1/user/auth/google?redirect_url=${redirectUrl}`} className="google-btn">
         <div className="google-icon-wrapper">
           <img className="google-icon" src="/google.png" alt="Google logo" />
         </div>

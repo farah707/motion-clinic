@@ -35,7 +35,7 @@ import AIChat from "./Pages/AIChat/AIChat";
 import ChatHistory from "./Pages/ChatHistory/ChatHistory";
 
 // Use environment variable for API base URL
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 // Helper component to handle token from URL
 const TokenHandler = () => {

@@ -17,7 +17,7 @@ const MessageForm = () => {
 
   const fetchUserData = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/api/v1/user/profile", { withCredentials: true });
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/profile`, { withCredentials: true });
       if (data.user) {
         setFormData({
           firstName: data.user.firstName || "",
@@ -49,7 +49,7 @@ const MessageForm = () => {
     e.preventDefault();
     try {
       const fullName = `${formData.firstName} ${formData.lastName}`;
-      const res = await axios.post("http://localhost:4000/api/v1/message/send", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/message/send`, {
         fullName,
         email: formData.email,
         phone: formData.phone,

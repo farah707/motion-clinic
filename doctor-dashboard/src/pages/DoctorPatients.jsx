@@ -13,7 +13,7 @@ const DoctorPatients = () => {
 
   const fetchPatients = () => {
     axios
-      .get("http://localhost:4000/api/v1/user/my-patients", {
+      .get(`${import.meta.env.VITE_API_URL}/api/v1/user/my-patients`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -42,23 +42,21 @@ const DoctorPatients = () => {
   };
 
   const handleSave = async (id) => {
-  console.log("💾 Saving for ID:", id); // Debug log
+    console.log("💾 Saving for ID:", id); // Debug log
 
-  try {
-    await axios.put(`http://localhost:4000/api/v1/user/update-medical/${id}`, formData, {
-      withCredentials: true,
-    });
+    try {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/v1/user/update-medical/${id}`, formData, {
+        withCredentials: true,
+      });
 
-    console.log("✅ Save successful");
-    setEditingId(null);
-    setFormData({});
-    fetchPatients();  // Re-fetch updated data
-  } catch (err) {
-    console.error("❌ Save error:", err);
-  }
-};
-
-
+      console.log("✅ Save successful");
+      setEditingId(null);
+      setFormData({});
+      fetchPatients();  // Re-fetch updated data
+    } catch (err) {
+      console.error("❌ Save error:", err);
+    }
+  };
 
   const handleCancel = () => {
     setEditingId(null);

@@ -16,7 +16,7 @@ const CompletedAppointments = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('authToken');
-      const response = await axios.get(`http://localhost:4000/api/v1/appointment/doctor/completed`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/appointment/doctor/completed`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
