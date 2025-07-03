@@ -58,7 +58,8 @@ export const googleAuthCallback = async (req, res, next) => {
       // Store token in cookie and redirect
       res.cookie(cookieName, token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Use secure in production
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 24 * 60 * 60 * 1000 // 24 hours
       });
       
@@ -304,6 +305,8 @@ export const logoutUser = (req, res) => {
     .cookie("token", "", {
       expires: new Date(Date.now()),
       httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     })
     .json({
       success: true,
@@ -335,20 +338,26 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
   try {
     // 1. Remove JWT token cookie
     res.cookie('token', '', {
-      expires: new Date(0),
-      httpOnly: true
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
 
     // 2. Remove patient token cookie
     res.cookie('patientToken', '', {
       expires: new Date(0),
-      httpOnly: true
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
 
     // 3. Remove admin token cookie
     res.cookie('adminToken', '', {
       expires: new Date(0),
-      httpOnly: true
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
 
     // 4. Clear session synchronously
