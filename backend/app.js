@@ -58,6 +58,25 @@ setupPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Root route for testing
+app.get("/", (req, res) => {
+  res.json({ 
+    message: "Motion Clinic API is running!", 
+    status: "success",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Health check route for Railway
+app.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "healthy",
+    message: "Motion Clinic API is healthy!",
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/appointment", appointmentRouter);
