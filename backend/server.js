@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import app from './app.js';
 import ragAssistant from './utils/ragModel.js';
+import { checkRailwayEnvironment, logRailwayInfo } from './utils/railwayCheck.js';
 
 config(); // Load environment variables
 
@@ -9,9 +10,15 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://farahtarek707:Ihf29082
 
 console.log('MongoDB URI:', MONGO_URI);
 
+// Log Railway deployment info
+logRailwayInfo();
+
 // Error handling for the server
 const server = app.listen(PORT, async () => {
   console.log(`Server listening at port ${PORT}`);
+  
+  // Check Railway environment
+  await checkRailwayEnvironment();
   
   // Pre-load the RAG model in the background
   console.log('Pre-loading RAG model...');

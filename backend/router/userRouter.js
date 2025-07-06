@@ -36,6 +36,15 @@ import {
 
 const router = express.Router();
 
+// Health check endpoint for Railway
+router.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "OK", 
+    message: "Server is running",
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Google OAuth routes
 router.get('/auth/google', googleAuth);
 router.get('/auth/google/callback', googleAuthCallback);
