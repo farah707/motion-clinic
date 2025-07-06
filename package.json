@@ -1,0 +1,9 @@
+{
+  "name": "motion-clinic-main-root",
+  "private": true,
+  "description": "Root package.json for motion-clinic-main. Run backend and frontend from their own folders.",
+  "scripts": {
+    "start": "echo Please run backend and frontend from their respective folders.",
+    "dev": "echo Please run backend and frontend from their respective folders."
+  }
+}
