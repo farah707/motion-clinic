@@ -84,7 +84,7 @@ class RAGMedicalAssistant {
   async callPythonRAG(query, context) {
     return new Promise((resolve, reject) => {
       // Build the command as a single string to properly handle spaces
-      let command = `python "${this.pythonScriptPath}" --query "${query}" --mode query`;
+      let command = `python3 "${this.pythonScriptPath}" --query "${query}" --mode query`;
       
       if (context.age !== undefined && context.age !== null && context.age !== '') {
         command += ` --age ${context.age}`;
@@ -174,7 +174,7 @@ class RAGMedicalAssistant {
     return new Promise((resolve, reject) => {
       console.log('Initializing RAG model...');
       
-      const pythonProcess = spawn('python', [
+      const pythonProcess = spawn('python3', [
         this.pythonScriptPath,
         '--mode', 'initialize'
       ], {
@@ -217,7 +217,7 @@ class RAGMedicalAssistant {
     console.log('[RAG] Preloading model for faster responses...');
     try {
       // Start a background process to preload the model
-      const preloadProcess = spawn('python', [
+      const preloadProcess = spawn('python3', [
         this.pythonScriptPath,
         '--mode', 'preload'
       ], {
@@ -270,7 +270,7 @@ export default ragAssistant;
 // Check if Python is available
 export const checkPythonAvailability = () => {
   return new Promise((resolve) => {
-    const pythonProcess = spawn('python', ['--version']);
+    const pythonProcess = spawn('python3', ['--version']);
     
     pythonProcess.on('close', (code) => {
       resolve(code === 0);
