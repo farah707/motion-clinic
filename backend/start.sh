@@ -7,8 +7,12 @@ echo "Starting Motion Clinic Backend..."
 if command -v python3 &> /dev/null; then
     echo "Python3 is available"
     python3 --version
+    echo "Python3 path: $(which python3)"
 else
     echo "Python3 is not available"
+    echo "Available Python versions:"
+    which python || echo "python not found"
+    which python3 || echo "python3 not found"
 fi
 
 # Check if Node.js is available
